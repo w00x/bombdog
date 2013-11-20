@@ -4,7 +4,7 @@
 
 int hello(struct mg_event *event) {
     MYSQL_RES *result;
-    result = db_query("select * from post_tags");
+    result = db_query("select * from cuenta");
 
     if (result == NULL) 
     {
@@ -12,7 +12,7 @@ int hello(struct mg_event *event) {
     }
 
     char *json_str = mysql_json(result);
-
+printf("%s",json_str);
     echo_content(event,"application/json",json_str);
 
 	return 0;

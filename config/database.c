@@ -7,7 +7,7 @@ struct core_db_conf get_db_conf() {
 	DB_CONF.host = "localhost";
 	DB_CONF.user = "root";
 	DB_CONF.password = "08041984";
-	DB_CONF.database = "tagg";
+	DB_CONF.database = "tengotinta_dev";
 
 	return DB_CONF;
 }

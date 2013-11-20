@@ -34,10 +34,11 @@ char *mysql_json(MYSQL_RES *result) {
         return NULL;
     }
 
+char *content = "";
     MYSQL_FIELD *fields;
     fields = mysql_fetch_fields(result);
 
-    char *table_name = fields->org_table;
+	char *table_name = fields->org_table;
 
     int num_fields = mysql_num_fields(result);
     MYSQL_ROW row;
@@ -45,18 +46,25 @@ char *mysql_json(MYSQL_RES *result) {
     json_object * jobj = json_object_new_object();
     json_object *jarray = json_object_new_array();
     
-    char *pre_content = "";
 
     while ((row = mysql_fetch_row(result))) 
     { 
-        json_object * item_arr = json_object_new_object();
+        
+json_object * item_arr = json_object_new_object();
         int i = 0;
         for(i = 0; i < num_fields; i++) {
+		json_object *jstring;
+            if(row[i] != NULL) {
+		jstring = json_object_new_string(row[i]);
+		}
+		else {
+		jstring = json_object_new_string("");
+		}
             
-            json_object *jstring = json_object_new_string(row[i]);
             json_object_object_add(item_arr,fields[i].name, jstring);
         }        
-        json_object_array_add(jarray,item_arr);
+
+         json_object_array_add(jarray,item_arr);
     }
 
     json_object_object_add(jobj,table_name, jarray);

@@ -1,7 +1,9 @@
 #include "../core/headers/routes.h"
 
 int routes(struct mg_event *event) {
+	
 	if (event->type == MG_REQUEST_BEGIN) {
+
 	    if (!strcmp(event->request_info->uri, "/hello")) {
 	    	hello(event);
 	    }
